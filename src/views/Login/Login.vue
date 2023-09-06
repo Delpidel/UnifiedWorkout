@@ -1,1 +1,1 @@
-<template></template>
+<template>Olá mundo</template>

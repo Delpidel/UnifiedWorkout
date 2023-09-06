@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Login from '../views/login/Login.vue'
-import SignUp from '..views/cadastro/SignUp.vue'
+import SignUp from '../views/cadastro/SignUp.vue'
 import Dashboard from '../views/dashboard/Dashboard.vue'
 import ManageExercises from '../views/gerenciamento-exercicios/Exercises.vue'
 import ManageStudents from '../views/gerenciamento-alunos/Students.vue'
 import NewStudent from '../views/novo-aluno/NewStudent.vue'
-import NewWorkout from '../views/cadastro-exercicios/NewWorkout.vue'
+import NewWorkout from '../views/cadastro-exercicio/NewWorkout.vue'
 import WorkoutView from '../views/visualizar-exercicios/WorkoutView.vue'
 
 const router = createRouter({
@@ -14,11 +14,11 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'Login',
+      name: 'login',
       component: Login
     },
     {
-      path: '/cadastros',
+      path: '/cadastro',
       name: 'SignUp',
       component: SignUp
     },
@@ -28,27 +28,27 @@ const router = createRouter({
       component: Dashboard
     },
     {
-      path: '/gerenciamento-exercicios',
+      path: '/gerenciamento-exercicio',
       name: 'Exercises',
       component: ManageExercises
     },
     {
-      path: '../gerenciamento-alunos',
+      path: '/gerenciamento-alunos',
       name: 'Students',
       component: ManageStudents
     },
     {
-      path: '../novo-aluno',
+      path: '/novo-aluno',
       name: 'NewStudent',
       component: NewStudent
     },
     {
-      path: '../cadastro-exercicios',
+      path: '/cadastro-exercicios',
       name: 'NewWorkout',
       component: NewWorkout
     },
     {
-      path: '../visualizar-exercicios',
+      path: '/visualizar-exercicios',
       name: 'WorkoutView',
       component: WorkoutView
     }
