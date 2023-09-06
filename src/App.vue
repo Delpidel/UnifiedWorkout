@@ -1,5 +1,3 @@
 <template>
-  <router-view>Olá mundo</router-view>
-
-  </template>
-  
+  <router-view></router-view>
+</template>
