@@ -1,73 +1,83 @@
 <template>
-    <form @submit.prevent="handleLogin" class="login-form">
-      <input placeholder="Digite o email" v-model="email" :class="{ error: emptyEmail }"
-      @input="clearError('email')"/>
-      <span v-if="emptyEmail" class="error-message">Campo obrigatório</span>
+  <v-sheet class="pa-12" rounded>
+    <v-card class="mx-auto px-6 py-8" max-width="344">
+      <v-form
+        v-model="form"
+        @submit.prevent="onSubmit"
+      >
+        <v-text-field
+          v-model="email"
+          :readonly="loading"
+          :rules="[required]"
+          class="mb-2"
+          clearable
+          label="Email"
+        ></v-text-field>
+
+        <v-text-field
+          v-model="password"
+          :readonly="loading"
+          :type="show1 ? 'text' : 'password'"
+          :rules="[required]"
+          clearable
+          label="Senha"
+          placeholder="Password"
+        ></v-text-field>
+
+        <br>
+        <v-btn
+          color="teal"
+          size="large"
+          type="submit"
+          variant="elevated"
+          block
+          >
+          Entrar
+        </v-btn><br>
+        <p>Ainda não tem conta? <router-link to="/cadastro">Cadastre-se</router-link></p>
+      </v-form>
+    </v-card>
+  </v-sheet>
+</template>
   
-      <input type="password" placeholder="Digite a senha" v-model="password" :class="{ error: emptyPassword }"
-      @input="clearError('password')"/>
-      <span v-if="emptyPassword" class="error-message">Campo obrigatório</span>
-      
-  
-      <button type="submit">Logar</button>
-  
-      <p>Ainda não tem conta? <router-link to="/cadastro">Cadastre-se</router-link></p>
-    </form>
-  </template>
-  
-  <script>
+<script>
+
+import axios from 'axios'
   export default {
-    data() {
-      return {
-        email: '',
-        password: '',
-        emptyEmail: false,
-        emptyPassword: false
-      }
-    },
+    data: () => ({
+      form: false,
+      email: '',
+      emailRules: [
+        v => !!v || 'Campo obrigatório',
+      ],
+      password: '',
+      loading: false,
+    }),
+
     methods: {
-      handleLogin() {
-          if (this.email === "") this.emptyEmail = true;
-          if (this.password === "") this.emptyPassword = true;
+      onSubmit () {
+        console.log("enviou formulário")
+
+        axios
+        .post('http://localhost:3000/sessions', {
+          email: this.email,
+          password: this.password
+        })
+        .then((response) => {
+         alert("Logado com sucesso")
+          localStorage.setItem("gym_token", response.data.token)
+          localStorage.setItem("gym_name", response.data.name)
+          this.$router.push('/dashboard');
+        })
+        .catch((error) => {
+          console.error('Erro ao realizar login:', error);
+        })
+       
+    },
+    // Propriedade RULES para deixar o código mais enxuto
+      required (v) {
+        return !!v || 'Campo obrigatório'
       },
-      clearError(fieldName) {
-          if (fieldName === "email" && this.email) {
-          this.emptyEmail = false;
-          }
-          if (fieldName === "password" && this.password) {
-          this.emptyPassword = false;
-        }
-      }
+    },
   }
-  }
-  
-  </script>
-  
-  <style scoped>
-  .login-form {
-    margin: 40px auto;
-    width: 40%;
-    border-radius: 4px;
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    padding: 30px;
-  }
-  
-  input {
-    height: 54px;
-    width: 80%;
-    border-radius: 8px;
-    border: 1px solid #756767;
-    outline: none;
-  }
-  .error {
-    border: 1px solid red;
-  }
-  
-  .error-message {
-    color: red;
-  }
-  </style>
+</script>
