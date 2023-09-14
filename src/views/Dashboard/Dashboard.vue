@@ -1,6 +1,22 @@
 <template>
-  
-    <div>
+  <v-app>
+    <v-app-bar app color="teal">
+      <v-toolbar-title>Gerenciamento de Exercícios</v-toolbar-title>
+      <v-spacer></v-spacer> <!-- Add a spacer to push links to the right -->
+      <router-link to="/">
+        <v-btn text color="white">Home</v-btn>
+      </router-link>
+      <router-link to="/link2">
+        <v-btn text color="white">Alunos</v-btn>
+      </router-link>
+      <router-link to="/link3">
+        <v-btn text color="white">Exercícios</v-btn>
+      </router-link>
+      <router-link to="/link1">
+        <v-btn text color="white">Sair</v-btn>
+      </router-link>
+    </v-app-bar>
+    <div class="mt-15">
       <v-row>
         <v-col cols="12" md="8">
           <v-card>
@@ -37,6 +53,7 @@
       </v-row>
       
     </div>
+  </v-app>
   </template>
   
   <script>
