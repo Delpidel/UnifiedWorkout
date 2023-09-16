@@ -1,18 +1,18 @@
 <template>
   <v-app>
     <v-app-bar app color="teal">
-      <v-toolbar-title>Gerenciamento de Exercícios</v-toolbar-title>
-      <v-spacer></v-spacer> <!-- Add a spacer to push links to the right -->
+      <v-toolbar-title>Dashboard</v-toolbar-title>
+      <v-spacer></v-spacer> 
       <router-link to="/">
         <v-btn text color="white">Home</v-btn>
       </router-link>
-      <router-link to="/link2">
+      <router-link to="/gerenciamento-alunos">
         <v-btn text color="white">Alunos</v-btn>
       </router-link>
-      <router-link to="/link3">
+      <router-link to="/cadastro-exercicios">
         <v-btn text color="white">Exercícios</v-btn>
       </router-link>
-      <router-link to="/link1">
+      <router-link to="/">
         <v-btn text color="white">Sair</v-btn>
       </router-link>
     </v-app-bar>
@@ -67,7 +67,7 @@
       };
     },
     mounted() {
-      this.fetchDashboardData();
+      this.buscarDadosDashboard();
     },
     methods: {
     adicionarAluno() {
@@ -82,7 +82,7 @@
         localStorage.setItem('exerciciosCount', this.exerciciosCount);
       });
     },
-    fetchDashboardData() {
+    buscarDadosDashboard() {
       axios.get("http://localhost:3000/dashboard").then((response) => {
         if (response.data) {
           this.alunosCount = response.data.amount_students;

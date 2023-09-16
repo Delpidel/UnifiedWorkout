@@ -6,13 +6,13 @@
       <router-link to="/">
         <v-btn text color="white">Home</v-btn>
       </router-link>
-      <router-link to="/link2">
+      <router-link to="/gerenciamento-alunos">
         <v-btn text color="white">Alunos</v-btn>
       </router-link>
-      <router-link to="/link3">
+      <router-link to="/gerenciamento-exercicios">
         <v-btn text color="white">Exercícios</v-btn>
       </router-link>
-      <router-link to="/link1">
+      <router-link to="/">
         <v-btn text color="white">Sair</v-btn>
       </router-link>
     </v-app-bar>
@@ -41,11 +41,18 @@
           <thead>
             <tr>
               <th>Aluno(a)</th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(aluno, index) in alunosFiltrados" :key="index">
               <td>{{ aluno.name }}</td>
+              <td>
+               <router-link :to="'/cadastro-exercicios/' + aluno.id"></router-link>
+               <v-btn @click="sendToNewWorkout(aluno.id)"
+                color="teal"
+                class="mb-2">Montar treino</v-btn>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -55,7 +62,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 
 export default {
   data() {
@@ -69,7 +76,6 @@ export default {
       return this.alunos.filter(aluno => {
         return (
           aluno.name.toLowerCase().includes(this.pesquisa.toLowerCase())
-          // Adicione outras condições de pesquisa, se necessário
         );
       });
     },
@@ -78,18 +84,24 @@ export default {
     buscarAlunos() {
       axios.get('http://localhost:3000/students')
         .then(response => {
-          this.alunos = response.data.students;
+          this.alunos = response.data.students
         })
         .catch(error => {
-          console.error('Erro ao buscar alunos:', error);
+          console.error('Erro ao buscar alunos:', error)
         });
     },
     filtrarAlunos() {
-      // Atualize a lista de alunos filtrados com base na pesquisa
+      
     },
+    sendToNewWorkout(alunoId){
+    this.$router.push({
+      path: '/cadastro-exercicios',
+      query: { id: alunoId}
+    })
+    }
   },
   mounted() {
-    this.buscarAlunos();
+    this.buscarAlunos()
   },
 };
 </script>

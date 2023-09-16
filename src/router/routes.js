@@ -6,7 +6,7 @@ import Dashboard from '../views/dashboard/Dashboard.vue'
 import ManageExercises from '../views/gerenciamento-exercicios/Exercises.vue'
 import ManageStudents from '../views/gerenciamento-alunos/Students.vue'
 import NewStudent from '../views/novo-aluno/NewStudent.vue'
-import NewWorkout from '../views/cadastro-exercicio/NewWorkout.vue'
+import NewWorkout from '../views/cadastro-exercicios/NewWorkout.vue'
 import WorkoutView from '../views/visualizar-exercicios/WorkoutView.vue'
 
 const router = createRouter({
@@ -28,7 +28,7 @@ const router = createRouter({
       component: Dashboard
     },
     {
-      path: '/gerenciamento-exercicio',
+      path: '/gerenciamento-exercicios',
       name: 'Exercises',
       component: ManageExercises
     },

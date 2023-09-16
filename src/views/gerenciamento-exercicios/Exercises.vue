@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar app color="teal">
       <v-toolbar-title>Gerenciamento de Exercícios</v-toolbar-title>
-      <v-spacer></v-spacer> <!-- Add a spacer to push links to the right -->
+      <v-spacer></v-spacer>
       <router-link to="/">
         <v-btn text color="white">Home</v-btn>
       </router-link>
@@ -18,20 +18,16 @@
     </v-app-bar>
     <v-container class="mt-15">
       <v-row>
-        <v-col xs="12" sm="6"> <!-- Adjust the width of the input field here -->
-          <v-text-field 
-            v-model="novoExercicio" 
-            label="Digite o nome do exercício" 
+        <v-col xs="12" sm="6">
+          <v-text-field
+            v-model="novoExercicio"
+            label="Digite o nome do exercício"
             required
             class="text-field-responsive"
           ></v-text-field>
         </v-col>
-        <v-col xs="12" sm="6" class="mt-4"> <!-- Button appears at the bottom on smaller screens -->
-          <v-btn 
-            @click="adicionarExercicio" 
-            color="teal"
-            class="mb-2" 
-          >Cadastrar</v-btn>
+        <v-col xs="12" sm="6" class="mt-4">
+          <v-btn @click="adicionarExercicio" color="teal" class="mb-2">Cadastrar</v-btn>
         </v-col>
       </v-row>
 
@@ -56,62 +52,51 @@
   </v-app>
 </template>
 
-
-  
-  <script>
-  import axios from "axios";
-  
-  export default {
-    data() {
-      return {
-        novoExercicio: "",
-        exercises: [],
-      };
+<script>
+import axios from 'axios'
+export default {
+  data() {
+    return {
+      novoExercicio: '',
+      exercises: []
+    }
+  },
+  methods: {
+    adicionarExercicio() {
+      if (this.novoExercicio.trim() === '') {
+        return
+      }
+      axios
+        .post('http://localhost:3000/exercises', { description: this.novoExercicio })
+        .then(() => {
+          this.novoExercicio = ''
+          this.buscarExercicios()
+        })
+        .catch((error) => {
+          console.error('Erro ao cadastrar exercício:', error)
+        })
     },
-    methods: {
-      adicionarExercicio() {
-        if (this.novoExercicio.trim() === "") {
-          return;
-        }
-  
-        // Fazer a requisição POST para cadastrar o exercício
-        axios
-          .post("http://localhost:3000/exercises", { description: this.novoExercicio })
-          .then(() => {
-            // Limpar o campo de entrada
-            this.novoExercicio = "";
-  
-            // Atualizar a lista de exercícios local
-            this.buscarExercicios();
-          })
-          .catch((error) => {
-            console.error("Erro ao cadastrar exercício:", error);
-          });
-      },
-      buscarExercicios() {
-        // Fazer a requisição GET para buscar os exercícios
-        axios
-          .get("http://localhost:3000/exercises")
-          .then((response) => {
-            this.exercises = response.data;
-          })
-          .catch((error) => {
-            console.error("Erro ao buscar exercícios:", error);
-          });
-      },
-      removerExercicio(index) {
-        // Remover exercício da lista local
-        this.exercises.splice(index, 1);
-      },
+    buscarExercicios() {
+      axios
+        .get('http://localhost:3000/exercises')
+        .then((response) => {
+          this.exercises = response.data
+        })
+        .catch((error) => {
+          console.error('Erro ao buscar exercícios:', error)
+        })
     },
-    mounted() {
-      this.buscarExercicios();
-    },
-  };
-  </script>
+    removerExercicio(index) {
+      this.exercises.splice(index, 1)
+    }
+  },
+  mounted() {
+    this.buscarExercicios()
+  }
+}
+</script>
 
 <style>
-
 .table-responsive {
   max-width: 100%;
 }

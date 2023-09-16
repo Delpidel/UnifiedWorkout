@@ -8,14 +8,12 @@
           :error-messages="errors.name"
           label="Nome completo"
         ></v-text-field>
-
         <v-text-field
           v-model="email"
           class="mb-2"
           :error-messages="errors.email"
           label="Email"
         ></v-text-field>
-
         <v-text-field
           v-model="password"
           type="password"
@@ -23,7 +21,6 @@
           label="Senha"
           placeholder="Password"
         ></v-text-field>
-
         <v-text-field
           v-model="verifyPassword"
           type="password"
@@ -31,7 +28,6 @@
           label="Confirme a senha"
           placeholder="Password"
         ></v-text-field>
-
         <v-select
           v-model="type_plan"
           :error-messages="errors.type_plan"
@@ -39,14 +35,8 @@
           label="Selecione o plano"
           required
         ></v-select>
-
         <br />
-        <v-btn 
-        color="teal" 
-        size="large" 
-        type="submit" 
-        variant="elevated"
-        block> Criar conta </v-btn
+        <v-btn color="teal" size="large" type="submit" variant="elevated" block> Criar conta </v-btn
         ><br />
       </v-form>
     </v-card>
@@ -79,7 +69,6 @@ export default {
       }
     ]
   }),
-
   methods: {
     onSubmit() {
       try {
@@ -97,7 +86,6 @@ export default {
             .required('A confirmação necessária')
             .oneOf([yup.ref('password')], 'As senhas devem coincidir')
         })
-
         schema.validateSync(
           {
             name: this.name,
@@ -108,7 +96,6 @@ export default {
           },
           { abortEarly: false }
         )
-
         axios
           .post('http://localhost:3000/users', {
             name: this.name,

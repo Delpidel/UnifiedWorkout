@@ -1,5 +1,21 @@
 <template>
-    <h2 class="mb-4">Cadastro de Novo aluno</h2>
+   <v-app>
+    <v-app-bar app color="teal">
+      <v-toolbar-title>Gerenciamento de Exercícios</v-toolbar-title>
+      <v-spacer></v-spacer> 
+      <router-link to="/">
+        <v-btn text color="white">Home</v-btn>
+      </router-link>
+      <router-link to="/link2">
+        <v-btn text color="white">Alunos</v-btn>
+      </router-link>
+      <router-link to="/link3">
+        <v-btn text color="white">Exercícios</v-btn>
+      </router-link>
+      <router-link to="/link1">
+        <v-btn text color="white">Sair</v-btn>
+      </router-link>
+    </v-app-bar>
     <v-container>
     <v-sheet class="pa-12" rounded>
       <v-card class="mx-auto px-6 py-8" max-width=auto>
@@ -55,7 +71,6 @@
             max="2009-09-13"
           ></v-text-field>
           </v-col>
-
           <v-col
              cols="12"
               md="4"
@@ -122,13 +137,13 @@
            required
            ></v-text-field>
            </v-col>
-
           <v-btn type="submit" color="teal">Cadastrar</v-btn>
           </v-row>
         </v-form>
       </v-card>
     </v-sheet>
    </v-container>
+  </v-app>
 </template>
 
 <script>
