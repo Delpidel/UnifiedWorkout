@@ -3,16 +3,16 @@
     <v-app-bar app color="teal">
       <v-toolbar-title>Gerenciamento de Exercícios</v-toolbar-title>
       <v-spacer></v-spacer>
-      <router-link to="/">
+      <router-link to="/dashboard">
         <v-btn text color="white">Home</v-btn>
       </router-link>
-      <router-link to="/link2">
+      <router-link to="/gerenciamento-alunos">
         <v-btn text color="white">Alunos</v-btn>
       </router-link>
-      <router-link to="/link3">
+      <router-link to="/gerenciamento-exercicios">
         <v-btn text color="white">Exercícios</v-btn>
       </router-link>
-      <router-link to="/link1">
+      <router-link to="/">
         <v-btn text color="white">Sair</v-btn>
       </router-link>
     </v-app-bar>

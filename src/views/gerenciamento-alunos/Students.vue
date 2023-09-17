@@ -3,7 +3,7 @@
     <v-app-bar app color="teal">
       <v-toolbar-title>Gerenciamento de Alunos</v-toolbar-title>
       <v-spacer></v-spacer>
-      <router-link to="/">
+      <router-link to="/dashboard">
         <v-btn text color="white">Home</v-btn>
       </router-link>
       <router-link to="/gerenciamento-alunos">
@@ -22,15 +22,13 @@
           <v-text-field
             v-model="pesquisa"
             label="Pesquisar Aluno"
-            @input="filtrarAlunos"
+            @input="filterStudents"
           ></v-text-field>
         </v-col>
         <v-col xs="12" sm="6" class="mt-4">
-          <v-btn
-            @click="searchStudent"
-            color="teal"
-            class="mb-2"
-          >Buscar</v-btn>
+          <v-btn @click="searchStudents" color="teal" class="mb-2 ml-2">Buscar</v-btn>
+          <router-link :to="'/novo-aluno/'"></router-link>
+          <v-btn @click="sendToNewStudent()" color="teal" class="mb-2 ml-2">Adicionar Aluno</v-btn>
         </v-col>
       </v-row>
 
@@ -48,10 +46,15 @@
             <tr v-for="(aluno, index) in alunosFiltrados" :key="index">
               <td>{{ aluno.name }}</td>
               <td>
-               <router-link :to="'/cadastro-exercicios/' + aluno.id"></router-link>
-               <v-btn @click="sendToNewWorkout(aluno.id)"
-                color="teal"
-                class="mb-2">Montar treino</v-btn>
+                <router-link :to="'/cadastro-exercicios/' + aluno.id"></router-link>
+                <v-btn @click="sendToNewWorkout(aluno.id)" color="teal" class="ml-8 mb-3"
+                  >Montar treino</v-btn
+                >
+                <router-link :to="'/visualizar-exercicios/' + aluno.id"></router-link>
+                <v-btn @click="sendToWorkoutView(aluno.id)" color="teal" class="ml-8 mb-3"
+                  >Visualizar Treino</v-btn
+                >
+                <router-link :to="'/visualizar-exercicios/' + aluno.id"></router-link>
               </td>
             </tr>
           </tbody>
@@ -68,47 +71,55 @@ export default {
   data() {
     return {
       pesquisa: '',
-      alunos: [],
-    };
+      alunos: []
+    }
   },
   computed: {
     alunosFiltrados() {
-      return this.alunos.filter(aluno => {
-        return (
-          aluno.name.toLowerCase().includes(this.pesquisa.toLowerCase())
-        );
-      });
-    },
+      return this.alunos.filter((aluno) => {
+        return aluno.name.toLowerCase().includes(this.pesquisa.toLowerCase())
+      })
+    }
   },
   methods: {
-    buscarAlunos() {
-      axios.get('http://localhost:3000/students')
-        .then(response => {
+    searchStudents() {
+      axios
+        .get('http://localhost:3000/students')
+        .then((response) => {
           this.alunos = response.data.students
         })
-        .catch(error => {
+        .catch((error) => {
           console.error('Erro ao buscar alunos:', error)
-        });
+        })
     },
-    filtrarAlunos() {
-      
+    filterStudents() {},
+    sendToNewWorkout(alunoId) {
+      this.$router.push({
+        path: '/cadastro-exercicios',
+        query: { id: alunoId, name }
+      })
     },
-    sendToNewWorkout(alunoId){
-    this.$router.push({
-      path: '/cadastro-exercicios',
-      query: { id: alunoId}
-    })
+    sendToWorkoutView(alunoId) {
+      this.$router.push({
+        path: '/visualizar-exercicios',
+        query: { id: alunoId, name}
+
+      })
+    },
+    sendToNewStudent() {
+      this.$router.push({
+        path: '/novo-aluno'
+      })
     }
   },
   mounted() {
-    this.buscarAlunos()
-  },
-};
+    this.searchStudents()
+  }
+}
 </script>
 <style>
-
 .table-responsive {
-  max-width: 100%;
+  max-width: 50%;
 }
 
 .exercise-table {

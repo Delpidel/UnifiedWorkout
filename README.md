@@ -1,20 +1,18 @@
-# unified-workout
+# UNIFIED-WORKOUT
 
-This template should help get you started developing with Vue 3 in Vite.
+Unidied Workout é uma aplicação que permite que professores e instrutores de academia possam cadastrar um usuário próprio para fazer o gerenciamento de seus alunos, de exercícios e correlacionar alunos com exercícios.
 
-## Recommended IDE Setup
+## Tecnologias utilizadas
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+Unified Workout foi desenvolvido utilizando o framework Vue.js, que é um framework de desenvolvimento front-end, contando com várias bibliotecas de rotas, de validações de campos e de estilos.
 
-## Customize configuration
+## Como funciona?
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+Para que Unified Workout funcione em sua máquina, você precisa ter instalado o editor de códigos Visual Studio Code e o software Node.js, que permite execução de códigos JavaScript. Além disso, é necessária uma API para receber as requisições da aplicação. Para fazer a aplicação funcionar, você precisa de duas janelas do editor de código abertas: uma para a API e outra para a aplicação. No terminal da API, você executa o comando "npm run start", sem as aspas. No terminal da aplicação, você digita "npm run dev", também sem aspas.
 
-## Project Setup
+## Que melhorias poderiam ser aplicadas?
 
-```sh
-npm install
-```
+Unified Workout apresenta um problema de desenvolvimento em sua tela de visualização de exercícios.
 
 ### Compile and Hot-Reload for Development
 

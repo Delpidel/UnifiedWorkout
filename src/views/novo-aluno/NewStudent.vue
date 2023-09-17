@@ -1,25 +1,25 @@
 <template>
    <v-app>
     <v-app-bar app color="teal">
-      <v-toolbar-title>Gerenciamento de Exercícios</v-toolbar-title>
+      <v-toolbar-title>Cadastro de Alunos</v-toolbar-title>
       <v-spacer></v-spacer> 
-      <router-link to="/">
+      <router-link to="/dashboard">
         <v-btn text color="white">Home</v-btn>
       </router-link>
-      <router-link to="/link2">
+      <router-link to="/gerenciamento-alunos">
         <v-btn text color="white">Alunos</v-btn>
       </router-link>
-      <router-link to="/link3">
+      <router-link to="/gerenciamento-exercicios">
         <v-btn text color="white">Exercícios</v-btn>
       </router-link>
-      <router-link to="/link1">
+      <router-link to="/">
         <v-btn text color="white">Sair</v-btn>
       </router-link>
     </v-app-bar>
     <v-container>
     <v-sheet class="pa-12" rounded>
       <v-card class="mx-auto px-6 py-8" max-width=auto>
-        <v-form @submit.prevent="cadastrarAluno">
+        <v-form @submit.prevent="addStudent">
           <v-row>
             <v-col
              cols="12"
@@ -29,8 +29,6 @@
             v-model="aluno.name"
             label="Nome Completo"
             :rules="[required]"
-            clearable
-            required
           ></v-text-field>
         </v-col>
         <v-col
@@ -40,8 +38,6 @@
           <v-text-field
             v-model="aluno.email"
             label="E-mail"
-            required
-            clearable
             :rules="emailRules"
           ></v-text-field>
         </v-col>
@@ -53,8 +49,6 @@
             v-model="aluno.contact"
             label="Telefone"
             :rules="[required]"
-            clearable
-            required
           ></v-text-field>
           </v-col>
           <v-col
@@ -65,9 +59,7 @@
             v-model="aluno.date_birth"
             label="Data de Nascimento"
             :rules="[required]"
-            clearable
             type="date"
-            required
             max="2009-09-13"
           ></v-text-field>
           </v-col>
@@ -78,9 +70,8 @@
           <v-text-field
             v-model="cep"
             label="CEP"
-            @blur="consultarCEP"
+            @blur="fetchCEP"
             :rules="[required]"
-            required
           ></v-text-field>
           </v-col>
           <v-col
@@ -91,7 +82,6 @@
             v-model="aluno.street"
             :rules="[required]"
             label="Logradouro"
-            required
           ></v-text-field>
           </v-col>
           <v-col
@@ -102,7 +92,6 @@
             v-model="aluno.neighborhood"
             :rules="[required]"
             label="Bairro"
-            required
           ></v-text-field>
           </v-col>
           <v-col
@@ -113,7 +102,6 @@
             v-model="aluno.city"
             :rules="[required]"
             label="Cidade"
-            required
           ></v-text-field>
           </v-col>
           <v-col
@@ -124,7 +112,6 @@
             v-model="aluno.province"
             :rules="[required]"
             label="Estado"
-            required
           ></v-text-field>
           </v-col>
           <v-col
@@ -134,7 +121,6 @@
           <v-text-field
            v-model="aluno.complement" 
            label="Complemento" 
-           required
            ></v-text-field>
            </v-col>
           <v-btn type="submit" color="teal">Cadastrar</v-btn>
@@ -171,7 +157,7 @@ export default {
     }
   },
   methods: {
-    consultarCEP() {
+    fetchCEP() {
       axios
         .get(`https://viacep.com.br/ws/${this.cep}/json/`)
         .then((response) => {
@@ -182,16 +168,16 @@ export default {
           this.aluno.province = data.uf
         })
         .catch((error) => {
-          console.error('Erro ao consultar CEP:', error)
+          console.error('Erro ao fetch CEP:', error)
         })
     },
-    cadastrarAluno() {
+    addStudent() {
       axios
         .post('http://localhost:3000/students', this.aluno)
         .then((response) => {
           alert('Cadastrado com sucesso')
           localStorage.setItem('gym_name', response.data.name)
-          this.$router.push('/')
+          this.$router.push('/gerenciamento-alunos/')
         })
         .catch((error) => {
           this.mensagem = 'Erro ao cadastrar aluno.'

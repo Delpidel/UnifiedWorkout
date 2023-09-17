@@ -74,7 +74,6 @@ import axios from 'axios'
         })
        
     },
-    // Propriedade RULES para deixar o código mais enxuto
       required (v) {
         return !!v || 'Campo obrigatório'
       },
