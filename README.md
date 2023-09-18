@@ -12,22 +12,8 @@ Para que Unified Workout funcione em sua máquina, você precisa ter instalado o
 
 ## Que melhorias poderiam ser aplicadas?
 
-Unified Workout apresenta um problema de desenvolvimento em sua tela de visualização de exercícios.
+Unified Workout apresenta um problema de desenvolvimento em sua tela de visualização de exercícios. O layout também pe bastante simples, faltando ícones de embelezamento.
 
-### Compile and Hot-Reload for Development
+### Vídeo da aplicação
 
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+![Video do funcionamento da aplicação](https://drive.google.com/drive/folders/1FKMCeRx3QXy70nURNlYKkCdnN62ANNou?usp=sharing)
