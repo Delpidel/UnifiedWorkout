@@ -96,13 +96,13 @@ export default {
     sendToNewWorkout(alunoId) {
       this.$router.push({
         path: '/cadastro-exercicios',
-        query: { id: alunoId, name }
+        query: { id: alunoId }
       })
     },
     sendToWorkoutView(alunoId) {
       this.$router.push({
         path: '/visualizar-exercicios',
-        query: { id: alunoId, name}
+        query: { id: alunoId }
 
       })
     },

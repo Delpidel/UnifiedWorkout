@@ -17,15 +17,13 @@
       </router-link>
     </v-app-bar>
     <div class="mt-15">
-      <div v-if="arrayTreino.length > 0" class="mt-15">
+      <div v-if="arrayTreino.length > 0">
         <h2>Treino</h2>
       </div>
       <h2>Exercícios de Hoje</h2>
-      <div>
       <v-checkbox v-for="workout in todayWorkout" :key="workout.id" v-model="status" :label="[workout.exercise_description, ' || ',
       workout.weight, ' kg || ', workout.repetitions, ' repetições || ', workout.break_time, ' tempo de Pausa ']"
         :value="workout.id">{{ workout.exercise_description }}</v-checkbox>
-      </div>
       <h2>Exercícios da Semana</h2>
       <v-card>
         <v-tabs v-model="diaSemana">
